@@ -56,8 +56,8 @@ class Client():
         return await asyncio.wait_for(future, timeout)
     
     @patchable
-    async def ask(self, chat_id, text, filters=None, timeout=None, *args, **kwargs):
-        request = await self.send_message(chat_id, text, reply_markup=ForceReply(True), *args, **kwargs)
+    async def ask(self, chat_id, text, filters=None, timeout=None, reply_to=None, *args, **kwargs):
+        request = await self.send_message(chat_id, text, reply_to_message_id=reply_to, reply_markup=ForceReply(True), *args, **kwargs)
         response = await self.listen(chat_id, filters, timeout)
         response.request = request
         return response
