@@ -41,7 +41,7 @@ class Client():
         self.old__init__(*args, **kwargs)
     
     @patchable
-    async def listen(self, chat_id, filters=None, timeout=None):
+    async def listen(self, chat_id, filters=None, timeout=None, reply_to=None):
         if type(chat_id) != int:
             chat = await self.get_chat(chat_id)
             chat_id = chat.id
@@ -58,7 +58,7 @@ class Client():
     @patchable
     async def ask(self, chat_id, text, filters=None, timeout=None, reply_to=None, *args, **kwargs):
         request = await self.send_message(chat_id, text, reply_to_message_id=reply_to, reply_markup=ForceReply(True), *args, **kwargs)
-        response = await self.listen(chat_id, filters, timeout)
+        response = await self.listen(chat_id, filters, timeout, reply_to)
         response.request = request
         return response
    
