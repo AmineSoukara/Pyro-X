@@ -23,7 +23,6 @@ import functools
 import pyrogram
 
 from ..utils import patch, patchable
-from pyrogram.types import ForceReply
 
 loop = asyncio.get_event_loop()
     
@@ -41,7 +40,7 @@ class Client():
         self.old__init__(*args, **kwargs)
     
     @patchable
-    async def listen(self, chat_id, filters=None, timeout=None, reply_to_message_id=None):
+    async def listen(self, chat_id, filters=None, timeout=None):
         if type(chat_id) != int:
             chat = await self.get_chat(chat_id)
             chat_id = chat.id
@@ -56,9 +55,9 @@ class Client():
         return await asyncio.wait_for(future, timeout)
     
     @patchable
-    async def ask(self, chat_id, text, filters=None, timeout=None, reply_to_message_id=None, *args, **kwargs):
-        request = await self.send_message(chat_id, text, reply_to_message_id=reply_to_message_id, reply_markup=ForceReply(True), *args, **kwargs)
-        response = await self.listen(chat_id, filters, timeout, reply_to_message_id)
+    async def ask(self, chat_id, text, filters=None, timeout=None, *args, **kwargs):
+        request = await self.send_message(chat_id, text, *args, **kwargs)
+        response = await self.listen(chat_id, filters, timeout)
         response.request = request
         return response
    
