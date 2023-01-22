@@ -19,4 +19,5 @@ along with pyromod.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from .listen import *
+from .message import *
 from .utils import PyromodConfig
