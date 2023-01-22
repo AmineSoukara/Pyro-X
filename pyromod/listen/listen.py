@@ -29,16 +29,16 @@ loop = asyncio.get_event_loop()
 
 class ListenerStopped(Exception):
     pass
-
+pyrogram.errors.ListenerStopped = ListenerStopped
 
 class ListenerTimeout(Exception):
     pass
-
+pyrogram.errors.ListenerTimeout = ListenerTimeout
 
 class ListenerTypes(Enum):
     MESSAGE = "message"
     CALLBACK_QUERY = "callback_query"
-
+pyrogram.enums.ListenerTypes = ListenerTypes
 
 @patch(pyrogram.client.Client)
 class Client:
