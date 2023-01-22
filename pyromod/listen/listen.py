@@ -189,6 +189,10 @@ class MessageHandler:
 
     @patchable
     async def check(self, client, message):
+        print(message.chat.id)
+        print(message.from_user.id)
+        print(message.id)
+
         listener = client.match_listener(
             (message.chat.id, message.from_user.id, message.id),
             ListenerTypes.MESSAGE,
