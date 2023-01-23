@@ -7,9 +7,9 @@ Message.input = property(
     if len(m.command) > 1 else None
 )
 
-async def del_in(self: Message, seconds: int, revoke: bool=True):
-    """Delete message in x Seconds"""
-    await asleep(seconds)
-    return await self.delete(revoke=revoke)
-Message.delete_in = del_in
-async_to_sync(Message, 'delete_in')
+# async def del_in(self: Message, seconds: int, revoke: bool=True):
+#    """Delete message in x Seconds"""
+#    await asleep(seconds)
+#    return await self.delete(revoke=revoke)
+# Message.delete_in = del_in
+# async_to_sync(Message, 'delete_in')
